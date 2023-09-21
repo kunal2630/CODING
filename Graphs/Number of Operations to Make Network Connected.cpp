@@ -46,10 +46,10 @@ public:
         
         /*
 
-         We have to make connections such that we can form  components  because inside components they will be already  connected so at the end we will just have to connect different componets and cables required to connect them will be our answer
-
-
-        */
+         We have to make connections such that we can form  components  because inside components they will be already  connected so at the end 
+         we will just have to connect different componets and cables required to connect them will be our answer
+         
+         */
         
         //At starting suppose all are standalone hence we have n components
         int component=n;
