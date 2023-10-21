@@ -132,3 +132,64 @@ public:
 
         
     }
+
+ //Approach -3  - Bets Time and space Complexity
+
+    /*
+
+    The problem with 1st and 2nd approach was that we are most of the task in hasNext() , but we know that in program hasNext() and 
+    next() are called multiple times but first function which is a constrructor function it is callled once si do most of 
+    the calculation in this constructor function so that hasNext() and next() can be implemented in O(1) time 
+
+    Steps - We can open complete nested list in the constructor function 
+
+
+    */
+
+    //To store complete list
+
+    //Store address instead of object to reduce space
+    queue<NestedInteger*> q;
+
+    void openList(vector<NestedInteger> &nestedList){
+
+        int n= nestedList.size();
+
+        for(int i=0;i<n;i++){
+
+            NestedInteger& obj=nestedList[i];
+
+          
+            if(obj.isInteger()){
+
+                //Curent element is a Integer type
+                q.push(&obj);
+            }
+
+            else{
+
+                 //Curent element is a List type , so call the recursion with currentList
+                openList(nestedList[i].getList());
+            }
+        }
+    }
+
+    NestedIterator(vector<NestedInteger> &nestedList) {
+
+        openList(nestedList);
+        
+    }
+    
+    int next() {
+
+        int el=q.front()->getInteger();
+        q.pop();
+        return el;
+        
+    }
+    
+    bool hasNext() {
+
+        return !q.empty();
+        
+    }
