@@ -1,7 +1,8 @@
 class NestedIterator {
 public:
     
-    
+    //Aproach 1 -
+
     /*
 
     Always remember that flattening question can easily be done using stack or recursion , because if any time they ask about current value we can just return stack top
@@ -63,5 +64,71 @@ public:
         }
 
         return false;
+        
+    }
+
+    //Aproach 2 -
+
+    /*
+
+    From Approach 1 we know that  stack<NestedInteger>  st - so clearly our stack holds NesterInteger complete obj which is taking is lot of sapce to improve space complexity instead of storing complete object we could just store address
+
+    To get address we use - &
+    To store adreess we use - *
+    To access value from pointer we use -  ->
+    
+
+    */
+
+     //I could also have used : stack<NestedInteger> but, using pointer will help me save space
+    stack<NestedInteger*> st;
+
+    NestedIterator(vector<NestedInteger> &nestedList) {
+
+        int n=nestedList.size();
+        for(int i=n-1;i>=0;i--){
+
+            //&obj - to store address
+            st.push(&nestedList[i]); 
+        }
+
+
+        
+    }
+    
+    int next() {
+
+        int num=st.top()->getInteger();
+        st.pop();
+        return num;
+        
+    }
+    
+    bool hasNext() {
+
+        
+        while(!st.empty()){
+
+            NestedInteger* curr=st.top();
+
+            
+            if(curr->isInteger()){
+
+                return true;
+            }
+
+            st.pop();
+
+            vector<NestedInteger>& v=curr->getList();
+
+            for(int i=v.size()-1;i>=0;i--){
+
+                st.push(&v[i]);
+            }
+        }
+        
+        //if stack is empty
+        return false;
+
         
     }
