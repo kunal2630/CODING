@@ -10,7 +10,7 @@
 
     */
 
-
+    // Recursion + Memoisation 
     int dp[31][1001];
     int mod=1e9+7;
     int f(int n, int k, int target){
@@ -42,6 +42,39 @@
         memset(dp,-1,sizeof(dp));
         return f(n,k,target);
     }
+
+//Tabulation 
+
+    int mod=1e9+7;
+
+    int numRollsToTarget(int n, int k, int target) {
+        
+        int dp[31][1001];
+        memset(dp,0,sizeof(dp));
+        dp[0][0]=1;
+        
+        
+        for(int idx=1;idx<=n;idx++){
+
+            for(int t=0;t<=target;t++){
+
+                int ans=0;
+
+            for(int i=1;i<=k;i++){
+
+                if(t-i>=0 ) ans =(ans+dp[idx-1][t-i])%mod;
+            }
+
+             dp[idx][t]=ans;
+
+            }
+        }
+
+   
+
+        return dp[n][target];
+    }
+
 
 
    
