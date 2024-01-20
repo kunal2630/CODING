@@ -25,6 +25,7 @@ which is smaller than the current element then from that index+1 to currentindex
             }
             else {
 
+                // 1.arr[st.top()]>currEl or 2.arr[st.top()]>=currEl which to use  to prevent duplicate we have use 1 as we cant use 2 in finding NSL and NSR in one of them only we can use 2 , so use 1 in one and use 2 in other 
                 while(!st.empty() && arr[st.top()]>currEl){
 
                     st.pop();
@@ -60,7 +61,8 @@ which is smaller than the current element then from that index+1 to currentindex
             }
             else {
 
-                while(!st.empty() && arr[st.top()]>=currEl){
+                
+             while(!st.empty() && arr[st.top()]>=currEl){
 
                     st.pop();
                 }
